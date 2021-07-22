@@ -7,6 +7,7 @@ datagroup: int_ma_chrtr_copy_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
+explore : mode1{}
 view:mode1 {
   derived_table: {
     sql:
@@ -47,6 +48,9 @@ view:mode1 {
 
       sql: ${TABLE}.clndr_skey;;
     }
+
+
+
 
 
 
