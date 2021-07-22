@@ -33,13 +33,24 @@ view:mode1 {
 
 
     }
-
-    dimension: clndrdt {
-      type: string
-
-      sql: ${TABLE}.clndr_dt;;
-    }
-
+  dimension_group: ClndrDate {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.CLNDR_DT ;;
+  }
+  dimension: clndr_skey {
+    type: number
+    sql: ${TABLE}.CLNDR_SKEY ;;
+  }
     dimension: brdcstyr {
       type: string
 
@@ -54,9 +65,6 @@ view:mode1 {
 
 
 
-    dimension:key {
-      type: string
 
-      sql: ${TABLE}.clndr_skey;;
-    }
+
     }
