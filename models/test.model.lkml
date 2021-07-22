@@ -34,19 +34,19 @@ view:mode1 {
 
     }
 
-    dimension: clndr_dt {
+    dimension: clndrdt {
       type: string
 
       sql: ${TABLE}.clndr_dt;;
     }
 
-    dimension: brdcst_yr_mo_nbr {
-      type: number
+    dimension: brdcstyr {
+      type: string
 
       sql: ${TABLE}.brdcst_yr_mo_nbr;;
     }
-    dimension: brdcst_yr_qtr_nbr {
-      type: number
+    dimension: brdcstqrtr {
+      type: string
 
       sql: ${TABLE}.brdcst_qtr_mo_nbr;;
     }
