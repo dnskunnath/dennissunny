@@ -1,14 +1,12 @@
 connection: "internal_ma_charter_looker_project"
 
-# include all the views
-include: "/views/**/*.view"
+#include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
+# include: "/**/*.view.lkml"                 # include all views in this project
+# include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
-datagroup: int_ma_chrtr_copy_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
-explore : mode1{}
-view:mode1 {
+
+explore : mode2{}
+view: mode2 {
   derived_table: {
     sql:
         SELECT
@@ -48,19 +46,4 @@ view:mode1 {
 
       sql: ${TABLE}.clndr_skey;;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
