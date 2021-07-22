@@ -28,7 +28,7 @@ view:mode1 {
           , brdcst_yr_mo_nbr
           , brdcst_yr_qtr_nbr
 
-        FROM am_calendar_dim
+        FROM Internal_MA_CHARTER_looker_Project.AM_CALENDAR_DIM
         ;;
 
 
