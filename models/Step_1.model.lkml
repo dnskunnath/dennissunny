@@ -22,7 +22,7 @@ connection: "internal_ma_charter_looker_project"
 explore : cmpgn_viewers{}
 view:cmpgn_viewers{
   derived_table: {
-sql: AS (
+sql: Select  (
     with cal AS (
 #      # Calendar for date range reference
       WITH dt_mo_qtr AS (
