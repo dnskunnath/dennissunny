@@ -1,23 +1,6 @@
 connection: "internal_ma_charter_looker_project"
 
-#include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
-# include: "/**/*.view.lkml"                 # include all views in this project
-# include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
-# # Select the views that should be a part of this model,
-# # and define the joins that connect them together.
-#
-# explore: order_items {
-#   join: orders {
-#     relationship: many_to_one
-#     sql_on: ${orders.id} = ${order_items.order_id} ;;
-#   }
-#
-#   join: users {
-#     relationship: many_to_one
-#     sql_on: ${users.id} = ${orders.user_id} ;;
-#   }
-# }
 
 explore : cmpgn_viewers{}
 view:cmpgn_viewers{
@@ -37,7 +20,7 @@ sql: Select  (
       )
       SELECT DISTINCT clndr_skey, clndr_dt AS dt, qtr
       FROM dt_mo_qtr
-      WHERE qtr = $var_qtr
+      WHERE qtr = var_qtr
         AND CURRENT_DATE() > mo_end + 10
     ),
 # AAD campaign data
