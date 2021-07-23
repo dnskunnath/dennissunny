@@ -7,7 +7,7 @@ view:cmpgn_viewers{
   derived_table: {
 sql: Select  (
     with cal AS (
-#      # Calendar for date range reference
+# Calendar for date range reference
       WITH dt_mo_qtr AS (
         SELECT
               clndr_dt
