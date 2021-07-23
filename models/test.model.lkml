@@ -79,7 +79,4 @@ view:cmpgn_viewers{
     sql: ${TABLE}.mo_end;;
   }
 
-
-
-
-    }
+}
