@@ -84,8 +84,8 @@ sql: Select  (
         AND (aad.cust_nbr_eid = eda.cust_nbr OR aad.cust_nbr_anm = eda.cust_nbr)
         WHERE end_dt >= strt_dt # Exclude cancelled orders
         AND strt_dt <= (SELECT Max(dt) FROM cal) AND end_dt >= (SELECT Min(dt) FROM cal)
-        AND ((eda.cust_id, eda.eclipse_regn_nm) IN (SELECT DISTINCT cust_id, eclipse_regn_nm FROM LAB_DATA_INSIGHTS."PUBLIC".CMPGN_AUD_COMP_CLIENT_QTR_TIM WHERE cust_id IS NOT NULL)
-          OR eda.cust_nm IN (SELECT DISTINCT cust_nm FROM LAB_DATA_INSIGHTS."PUBLIC".CMPGN_AUD_COMP_CLIENT_QTR_TIM))
+        AND ((eda.cust_id, eda.eclipse_regn_nm) IN (SELECT DISTINCT cust_id, eclipse_regn_nm FROM LAB_DATA_INSIGHTS.CMPGN_AUD_COMP_CLIENT_QTR_TIM WHERE cust_id IS NOT NULL)
+          OR eda.cust_nm IN (SELECT DISTINCT cust_nm FROM LAB_DATA_INSIGHTS.CMPGN_AUD_COMP_CLIENT_QTR_TIM))
     ),
     # Linear ad exposures
     lin_agg AS (
