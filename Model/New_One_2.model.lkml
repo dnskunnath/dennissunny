@@ -27,7 +27,7 @@ view: Ma1 {
              clndr_skey
           , brdcst_yr_mo_nbr AS mo
           , brdcst_yr_qtr_nbr AS qtr
-          , Max(clndr_dt) Over(PARTITION BY mo) AS mo_end
+
       from   Internal_MA_CHARTER_looker_Project.AM_CALENDAR_DIM
         GROUP BY 1,2,3,4;;
         }
