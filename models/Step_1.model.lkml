@@ -20,7 +20,7 @@ sql: Select  (
       )
       SELECT DISTINCT clndr_skey, clndr_dt AS dt, qtr
       FROM dt_mo_qtr
-#      WHERE qtr = '20211'
+    WHERE qtr = '20211'
         AND CURRENT_DATE() > mo_end + 10
     ),
 # AAD campaign data
