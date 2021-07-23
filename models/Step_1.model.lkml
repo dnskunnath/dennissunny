@@ -244,7 +244,7 @@ sql: Select  (
 
     dimension: dma_cd_key {
       type: string
-
+primary_key: yes
       sql: ${TABLE}.dma_cd_key;;
     }
 
