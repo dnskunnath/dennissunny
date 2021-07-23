@@ -20,7 +20,7 @@ sql: Select  (
       )
       SELECT DISTINCT clndr_skey, clndr_dt AS dt, qtr
       FROM dt_mo_qtr
-      WHERE qtr = var_qtr
+#      WHERE qtr = var_qtr
         AND CURRENT_DATE() > mo_end + 10
     ),
 # AAD campaign data
