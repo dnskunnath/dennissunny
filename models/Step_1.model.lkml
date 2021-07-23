@@ -20,7 +20,7 @@ sql: Select  (
       )
       SELECT DISTINCT clndr_skey, clndr_dt AS dt, qtr
       FROM dt_mo_qtr
-#      WHERE qtr = var_qtr
+#      WHERE qtr = '20211'
         AND CURRENT_DATE() > mo_end + 10
     ),
 # AAD campaign data
@@ -39,10 +39,8 @@ sql: Select  (
         FROM `Internal_MA_CHARTER_looker_Project.AAD_CAMPAIGN_DIM` c
         JOIN `Internal_MA_CHARTER_looker_Project.AAD_ADVERTISER_DIM` a
           ON c.advtsr_key = a.advtsr_key
-          # AND c.src_system_cd = a.src_system_cd # showing MRM1 as source system in advertiser dim; vs FW1 in campaign dim
-          AND a.active_ind = 1
+         AND a.active_ind = 1
         WHERE c.active_ind = 1
-          #AND c.cmpgn_nbr = '522495'
       ) aad_cmpgn
       LEFT JOIN `Internal_MA_CHARTER_looker_Project.AAD_CAMPAIGN_DIM` b1
           ON b1.cust_nbr = aad_cmpgn.cust_nbr_eid
