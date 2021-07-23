@@ -116,7 +116,7 @@ sql: Select  (
         , src_system_cd
         , Cast(Min(evnt_start_lcl_ts) As date) AS first_view_date
         , Cat(Max(evnt_start_lcl_ts) As date) AS last_view_date
-      FROM Internal_MA_CHARTER_looker_Project.AAD_EVENT_FACT  N
+      FROM Internal_MA_CHARTER_looker_Project.AAD_EVENT_FACT n
       WHERE evnt_utc_dt BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) + 1 FROM cal)
         AND Cast(evnt_start_lcl_ts As date) BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) FROM cal)
         AND cmpgn_key IN (SELECT DISTINCT cmpgn_key FROM cmpgn WHERE linr_flg = 0)
