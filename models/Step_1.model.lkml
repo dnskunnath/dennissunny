@@ -32,8 +32,8 @@ sql: Select  (
           c.cmpgn_nm,
           c.cmpgn_nbr,
           c.cmpgn_key,
-          c.cmpgn_start_ts::date AS cmpgn_start_dt,
-          c.cmpgn_end_ts::date AS cmpgn_end_dt,
+          Cast(c.cmpgn_start_ts As date) AS cmpgn_start_dt,
+          Cast (c.cmpgn_end_ts As date) AS cmpgn_end_dt,
           REGEXP_SUBSTR(REGEXP_REPLACE(a.advtsr_xtrn_id, '^[^0-9a-zA-Z]|[^0-9a-zA-Z]$', ''), '[^ _-]+$') AS cust_nbr_eid,
           REGEXP_SUBSTR(REGEXP_REPLACE(a.advtsr_nm, '^[^0-9a-zA-Z]|[^0-9a-zA-Z]$', ''), '[^ _-]+$') AS cust_nbr_anm
         FROM `Internal_MA_CHARTER_looker_Project.AAD_CAMPAIGN_DIM` c
