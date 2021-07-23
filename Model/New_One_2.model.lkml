@@ -18,8 +18,8 @@ connection: "internal_ma_charter_looker_project"
 #     sql_on: ${users.id} = ${orders.user_id} ;;
 #   }
 # }
-explore: ma_1 {}
-view: ma_1 {
+explore: Ma1 {}
+view: Ma1 {
  derived_table: {
   sql: Select  (
 
