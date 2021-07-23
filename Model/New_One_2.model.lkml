@@ -28,7 +28,7 @@ view: Ma1 {
           , brdcst_yr_mo_nbr AS mo
           , brdcst_yr_qtr_nbr AS qtr
           , Max(clndr_dt) Over(PARTITION BY mo) AS mo_end
-        FROM DEV_AM.BI.AM_CALENDAR_DIM
+      from   Internal_MA_CHARTER_looker_Project.AM_CALENDAR_DIM
         GROUP BY 1,2,3,4;;
         }
 
