@@ -21,15 +21,15 @@ connection: "internal_ma_charter_looker_project"
 explore: Ma1 {}
 view: Ma1 {
  derived_table: {
-  sql: Select  (
+  sql: Select
 
-              clndr_dt
-            , clndr_skey
+              clndr_dt,
+             clndr_skey
           , brdcst_yr_mo_nbr AS mo
           , brdcst_yr_qtr_nbr AS qtr
           , Max(clndr_dt) Over(PARTITION BY mo) AS mo_end
         FROM DEV_AM.BI.AM_CALENDAR_DIM
-        GROUP BY 1,2,3,4);;
+        GROUP BY 1,2,3,4;;
         }
 
 
@@ -43,14 +43,3 @@ dimension: custdat {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
