@@ -67,7 +67,7 @@ sql: Select  (
         JOIN Internal_MA_CHARTER_looker_Project.AM_EDA_CUSTOMER_DIM AS cust
             ON cust.cust_id = ordr.cust_id
             AND cust.eclipse_regn_nm = ordr.eclipse_regn_nm
-        WHERE COLLATE(ordr.ctrc_nbr,'') NOT RLIKE '[^0-9]'
+      #  WHERE COLLATE(ordr.ctrc_nbr,'') NOT RLIKE '[^0-9]'
       # Exclude non-numeric TIMs for now; Will need to modify for wide Orbit. This will impact how TIM gets loaded into Tableau R/F
     ),
     # Combined campaign data
