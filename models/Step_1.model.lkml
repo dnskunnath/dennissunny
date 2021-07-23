@@ -82,7 +82,8 @@ sql: Select  (
         LEFT JOIN aad
         ON (aad.cmpgn_nbr LIKE '%'||eda.ctrc_nbr||'%' OR aad.cmpgn_nm LIKE '%'||eda.ctrc_nbr||'%')
         AND (aad.cust_nbr_eid = eda.cust_nbr OR aad.cust_nbr_anm = eda.cust_nbr)
-        WHERE end_dt >= strt_dt # Exclude cancelled orders
+        WHERE end_dt >= strt_dt
+        # Exclude cancelled orders
         AND strt_dt <= (SELECT Max(dt) FROM cal) AND end_dt >= (SELECT Min(dt) FROM cal)
         AND ((eda.cust_id, eda.eclipse_regn_nm) IN (SELECT DISTINCT cust_id, eclipse_regn_nm FROM LAB_DATA_INSIGHTS.CMPGN_AUD_COMP_CLIENT_QTR_TIM WHERE cust_id IS NOT NULL)
           OR eda.cust_nm IN (SELECT DISTINCT cust_nm FROM LAB_DATA_INSIGHTS.CMPGN_AUD_COMP_CLIENT_QTR_TIM))
@@ -113,11 +114,11 @@ sql: Select  (
         , dma_key AS dma_cd_key
         , sbsc_guid_key
         , src_system_cd
-        , Min(evnt_start_lcl_ts::date) AS first_view_date
-        , Max(evnt_start_lcl_ts::date) AS last_view_date
+        , Cast(Min(evnt_start_lcl_ts) As date) AS first_view_date
+        , Cat(Max(evnt_start_lcl_ts) As date) AS last_view_date
       FROM PRD_AM.BI.AAD_EVENT_FACT AS N
       WHERE evnt_utc_dt BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) + 1 FROM cal)
-        AND evnt_start_lcl_ts::date BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) FROM cal)
+        AND Cast(evnt_start_lcl_ts As date) BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) FROM cal)
         AND cmpgn_key IN (SELECT DISTINCT cmpgn_key FROM cmpgn WHERE linr_flg = 0)
         AND lower(evnt_nm) = 'defaultimpression'
         AND exclude_rec = 0
