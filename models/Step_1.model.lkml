@@ -90,21 +90,22 @@ sql: Select  (
     ),
     # Linear ad exposures
     lin_agg AS (
-          SELECT
-          c.cust_id
-        , c.eclipse_regn_nm
-          , c.cust_nm
-        , c.ctrc_nbr
-        , l.syscode_dma_cd_key AS dma_cd_key
-        , l.sbsc_guid_key
-     #   , Min(Cast(l.ad_tuning_evnt_start_ts AS DATE)) AS first_view_date
-    #    , Max(Cast(l.ad_tuning_evnt_start_ts AS DATE)) AS last_view_date
-          FROM Internal_MA_CHARTER_looker_Project.AM_PROGRAM_AD_TUNING_EVENT_FACT AS l
-        JOIN (SELECT DISTINCT cust_id, cust_nm, ctrc_nbr, ord_nbr, eclipse_regn_nm FROM cmpgn) AS c
-        ON l.ord_nbr = c.ord_nbr
-        AND l.eclipse_regn_nm = c.eclipse_regn_nm
-      WHERE l.ad_evnt_start_dt BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) FROM cal)
-          GROUP BY 1,2,3,4,5,6
+           SELECT
+          cmpgn_key
+        , insr_ord_key
+        , dma_key AS dma_cd_key
+        , sbsc_guid_key
+        , src_system_cd
+        , Min(evnt_start_lcl_ts::date) AS first_view_date
+        , Max(evnt_start_lcl_ts::date) AS last_view_date
+      FROM DEV_AM.BI.AAD_EVENT_FACT AS N
+      WHERE evnt_utc_dt BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) + 1 FROM cal)
+        AND evnt_start_lcl_ts::date BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) FROM cal)
+        AND cmpgn_key IN (SELECT DISTINCT cmpgn_key FROM cmpgn WHERE linr_flg = 0)
+        AND lower(evnt_nm) = 'defaultimpression'
+        AND exclude_rec = 0
+        AND sbsc_guid_key <> -1
+          GROUP BY 1,2,3,4,5
       ),
       # AdsE exposures
        non_lin_agg AS (
@@ -180,7 +181,36 @@ sql: Select  (
 }
 
 
+  dimension_group: first_view_date {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.first_view_date ;;
+  }
 
+  dimension_group: last_view_date {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.last_view_date ;;
+
+  }
 
 
   dimension: cust_id {
