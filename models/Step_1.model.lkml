@@ -97,8 +97,8 @@ sql: Select  (
         , c.ctrc_nbr
         , l.syscode_dma_cd_key AS dma_cd_key
         , l.sbsc_guid_key
-        , Min(Cast(l.ad_tuning_evnt_start_ts AS DATE)) AS first_view_date
-        , Max(Cast(l.ad_tuning_evnt_start_ts AS DATE)) AS last_view_date
+     #   , Min(Cast(l.ad_tuning_evnt_start_ts AS DATE)) AS first_view_date
+    #    , Max(Cast(l.ad_tuning_evnt_start_ts AS DATE)) AS last_view_date
           FROM Internal_MA_CHARTER_looker_Project.AM_PROGRAM_AD_TUNING_EVENT_FACT AS l
         JOIN (SELECT DISTINCT cust_id, cust_nm, ctrc_nbr, ord_nbr, eclipse_regn_nm FROM cmpgn) AS c
         ON l.ord_nbr = c.ord_nbr
@@ -116,7 +116,7 @@ sql: Select  (
         , src_system_cd
         , Cast(Min(evnt_start_lcl_ts) As date) AS first_view_date
         , Cat(Max(evnt_start_lcl_ts) As date) AS last_view_date
-      FROM Internal_MA_CHARTER_looker_Project.AAD_EVENT_FACT
+      FROM Internal_MA_CHARTER_looker_Project.AAD_EVENT_FACT  as N
       WHERE evnt_utc_dt BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) + 1 FROM cal)
         AND Cast(evnt_start_lcl_ts As date) BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) FROM cal)
         AND cmpgn_key IN (SELECT DISTINCT cmpgn_key FROM cmpgn WHERE linr_flg = 0)
@@ -181,36 +181,7 @@ sql: Select  (
 
 
 
-  dimension_group: first_view_date {
-    type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.first_view_date ;;
-  }
 
-  dimension_group: last_view_date {
-    type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.last_view_date ;;
-
-  }
 
   dimension: cust_id {
     type: string
