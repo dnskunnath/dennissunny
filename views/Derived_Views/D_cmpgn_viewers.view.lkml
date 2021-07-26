@@ -12,18 +12,7 @@ view: D_cmpgn_viewers {
             , first_view_date
             , last_view_date
             FROM  ${D_lin_agg.SQL_TABLE_NAME} AS l
-          UNION ALL
-            SELECT DISTINCT
-              0 AS linr_flg
-            , c.cust_id
-            , c.eclipse_regn_nm
-            , c.cust_nm
-            , c.ctrc_nbr
-            , N.dma_cd_key
-            , N.sbsc_guid_key
-            , first_view_date
-            , last_view_date
-            FROM  ${D_non_lin_agg.SQL_TABLE_NAME} AS N
+
           JOIN (
               SELECT DISTINCT cust_id, cust_nm, ctrc_nbr, cmpgn_key, eclipse_regn_nm
               FROM  ${D_cmpgn.SQL_TABLE_NAME}

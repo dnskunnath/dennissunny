@@ -15,9 +15,9 @@ view: cmpgn {
               WHERE end_dt >= strt_dt
               # Exclude cancelled orders
               AND strt_dt <= (SELECT Max(dt) FROM cal) AND end_dt >= (SELECT Min(dt) FROM cal)
-              AND ((${D_eda.SQL_TABLE_NAME}.cust_id, ${D_eda.SQL_TABLE_NAME}.eclipse_regn_nm) IN (
+             -- AND ((${D_eda.SQL_TABLE_NAME}.cust_id, ${D_eda.SQL_TABLE_NAME}.eclipse_regn_nm) IN (
 
-              SELECT DISTINCT cust_id, eclipse_regn_nm FROM LAB_DATA_INSIGHTS.CMPGN_AUD_COMP_CLIENT_QTR_TIM WHERE cust_id IS NOT NULL)
-                OR ${D_eda.SQL_TABLE_NAME}.cust_nm IN (SELECT DISTINCT cust_nm FROM LAB_DATA_INSIGHTS.CMPGN_AUD_COMP_CLIENT_QTR_TIM))
+             -- SELECT DISTINCT cust_id, eclipse_regn_nm FROM LAB_DATA_INSIGHTS.CMPGN_AUD_COMP_CLIENT_QTR_TIM WHERE cust_id IS NOT NULL)
+            --    OR ${D_eda.SQL_TABLE_NAME}.cust_nm IN (SELECT DISTINCT cust_nm FROM LAB_DATA_INSIGHTS.CMPGN_AUD_COMP_CLIENT_QTR_TIM))
          ;;
         }}

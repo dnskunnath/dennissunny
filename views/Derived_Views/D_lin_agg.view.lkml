@@ -6,7 +6,7 @@ view: lin_agg {
               , c.eclipse_regn_nm
                 , c.cust_nm
               , c.ctrc_nbr
-              , l.syscode_dma_cd_key AS dma_cd_key
+              , l.syscode_dma_cd_key
               , l.sbsc_guid_key
               , Min(Cast(l.ad_tuning_evnt_start_ts AS DATE)) AS first_view_date
               , Max(Cast(l.ad_tuning_evnt_start_ts AS DATE)) AS last_view_date
@@ -17,5 +17,10 @@ view: lin_agg {
             WHERE l.ad_evnt_start_dt BETWEEN (SELECT Min(dt) FROM cal) AND (SELECT Max(dt) FROM ${D_cal.SQL_TABLE_NAME})
                 GROUP BY 1,2,3,4,5,6
     ;;
+  }
+
+  dimension:cust_id{
+    type:string
+    sql: ${TABLE}.cust_idy;;
   }
  }
