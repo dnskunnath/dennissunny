@@ -18,18 +18,28 @@ connection: "internal_ma_charter_looker_project"
 #     sql_on: ${users.id} = ${orders.user_id} ;;
 #   }
 # }
-explore : mode1{}
-view:mode1 {
+explore : cmpgn_viewers{}
+view:cmpgn_viewers{
   derived_table: {
     sql:
+        AS (
+    WITH cal AS (
+      -- Calendar for date range reference
+      WITH dt_mo_qtr AS (
         SELECT
-           clndr_dt
-          , clndr_skey
-          , brdcst_yr_mo_nbr
-          , brdcst_yr_qtr_nbr
-
+              clndr_dt
+            , clndr_skey
+          , brdcst_yr_mo_nbr AS mo
+          , brdcst_yr_qtr_nbr AS qtr
+          , Max(clndr_dt) Over(PARTITION BY mo) AS mo_end
         FROM Internal_MA_CHARTER_looker_Project.AM_CALENDAR_DIM
-        ;;
+        GROUP BY 1,2,3,4
+      )
+      SELECT DISTINCT clndr_skey, clndr_dt AS dt, qtr
+      FROM dt_mo_qtr
+      WHERE qtr = $var_qtr
+        AND CURRENT_DATE() > mo_end + 10
+    ) ;;
 
 
     }
@@ -63,8 +73,10 @@ view:mode1 {
     }
 
 
+  dimension: mo_end {
+    type: string
 
+    sql: ${TABLE}.mo_end;;
+  }
 
-
-
-    }
+}
