@@ -54,7 +54,7 @@ view: sample_superstore {
   }
 
   dimension: postal_code {
-    type: number
+    type: zipcode
     sql: ${TABLE}.Postal_Code ;;
   }
 
