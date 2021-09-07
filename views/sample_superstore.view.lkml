@@ -132,8 +132,5 @@ measure: sales {
     type: count
     drill_fields: [customer_name, product_name]
   }
-  dimension: Manufacturer {
-    type: string
-    sql: ${TABLE}.Product_Name ;;
-  }
+
 }
