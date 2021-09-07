@@ -134,6 +134,6 @@ measure: sales {
   }
   dimension: Manufacturer {
     type: string
-    sql: ${TABLE}.Manufacturer ;;
+    sql: ${TABLE}.Product_Name ;;
   }
 }
