@@ -132,8 +132,5 @@ measure: sales {
     type: count
     drill_fields: [customer_name, product_name]
   }
-  measure: Min {
-    type: number
-    drill_fields: [customer_name, product_name,order_date]
-  }
+
 }
