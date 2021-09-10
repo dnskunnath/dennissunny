@@ -132,5 +132,8 @@ measure: sales {
     type: count
     drill_fields: [customer_name, product_name]
   }
-
+  measure: average_sales {
+    type: average
+    sql: ${TABLE}.Sales;;
+  }
 }
