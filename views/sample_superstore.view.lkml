@@ -134,6 +134,6 @@ measure: sales {
   }
   measure: average_sales {
     type: average
-    sql: ${TABLE}.Sales;;
+    sql: ${TABLE}.Sales/${TABLE}.Quantity;;
   }
 }
