@@ -135,5 +135,6 @@ measure: sales {
   measure: average_sales {
     type: average
     sql: ${TABLE}.Sales/${TABLE}.Quantity;;
+    value_format:"$#.00;($#.00)"
   }
 }
