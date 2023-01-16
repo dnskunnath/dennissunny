@@ -10,6 +10,6 @@ datagroup: test_learning_lookml_default_datagroup {
 
 
 
-explore: sample_superstore {
-  sql_always_having: ${average_sales}>100;;
+explore: xyz {
+  sql_always_having: ${average_sales}>1;;
 }
